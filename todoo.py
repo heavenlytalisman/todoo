@@ -1,5 +1,12 @@
+from datetime import datetime
+
 
 file_name = "tasks.txt"
+
+def update_time():
+    current_time = datetime.now()
+    f_time = current_time.strftime("%d-%m-%Y %H:%M:%S")
+    return f_time
 
 def load_tasks():
     tasks = []
@@ -23,6 +30,8 @@ def update_task(tasks):
 def main():
     tasks = list(load_tasks())
     while True:
+        time = update_time()
+        print("\n" + time)
         print("\n YOUR TASKS \n")
         if not tasks:
             print("You have no pending tasks ")
@@ -35,8 +44,9 @@ def main():
         choice = str(input("Enter your choice: ").lower())
 
         if choice == 'a':
+            time = update_time()
             new_task = str(input("Enter a task to add: "))
-            tasks.append(new_task)
+            tasks.append(f"{new_task} ({time})")
             update_task(tasks)
         
         elif choice == "r":
